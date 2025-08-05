@@ -22,16 +22,16 @@ if (cluster.isPrimary) {
   const redisClient = createClient();
   redisClient.connect().catch(console.error);
 
-  const limiter = rateLimit({
-    store: new RedisStore({
-      sendCommand: (...args) => redisClient.sendCommand(args),
-    }),
-    windowMs: 60 * 1000, // 1 minute
-    max: 5, // liming each IP to 5 requests per windowMs
-    message: 'Too many requests, please try again later.',
-  });
+  // const limiter = rateLimit({
+  //   store: new RedisStore({
+  //     sendCommand: (...args) => redisClient.sendCommand(args),
+  //   }),
+  //   windowMs: 60 * 1000, // 1 minute
+  //   max: 5, // liming each IP to 5 requests per windowMs
+  //   message: 'Too many requests, please try again later.',
+  // });
 
-  app.use(limiter);
+  // app.use(limiter);
 
   const fakeDB = () =>
     new Promise((res) => {
